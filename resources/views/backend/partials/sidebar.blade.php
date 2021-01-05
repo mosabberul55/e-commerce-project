@@ -39,5 +39,23 @@
         </ul>
       </div>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#divisions-pages" aria-expanded="false" aria-controls="divisions-pages"> <img class="menu-icon" src="/images/menu_icons/08.png" alt="menu icon"> <span class="menu-title">Manage Divisions</span><i class="menu-arrow"></i></a>
+      <div class="collapse" id="divisions-pages">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{!! route('admin.division.index') !!}">manage Divisions</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{!! route('admin.division.create') !!}">Add Division</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#districts-pages" aria-expanded="false" aria-controls="districts-pages"> <img class="menu-icon" src="/images/menu_icons/08.png" alt="menu icon"> <span class="menu-title">Manage Districts</span><i class="menu-arrow"></i></a>
+      <div class="collapse" id="districts-pages">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{!! route('admin.district.index') !!}">manage Districts</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{!! route('admin.district.create') !!}">Add District</a></li>
+        </ul>
+      </div>
+    </li>
   </ul>
 </nav>
