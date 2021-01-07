@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PagesController;
 use App\Http\Controllers\Frontend\ProductsController;
 use App\Http\Controllers\Frontend\FrontCategoriesController;
+use App\Http\Controllers\Frontend\VerificationController;
 use App\Http\Controllers\Backend\AdminPagesController;
 use App\Http\Controllers\Backend\AdminProductsController;
 use App\Http\Controllers\Backend\CategoriesController;
@@ -41,6 +42,8 @@ Route::group(['prefix' => 'products'], function(){
     Route::get('/{id}', [FrontCategoriesController::class, 'show'])->name('category.show');
   });
 });
+//verify
+Route::get("/token/{token}", [VerificationController::class, 'verify'])->name('user.verification');
 
 //admin Routes
 Route::group(['prefix' => 'admin'], function(){

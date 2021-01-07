@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Division;
 use App\Models\District;
 use Illuminate\Support\Str;
+use App\Notifications\VerifyRegistration;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -63,7 +65,7 @@ class RegisterController extends Controller
     return Validator::make($data, [
       'first_name' => 'required|string|max:30',
       'last_name' => 'nullable|string|max:15',
-      'username' => 'string|max:8',
+      'username' => 'required|string|max:10',
       'email' => 'required|string|email|max:100|unique:users',
       'password' => 'required|string|min:6|confirmed',
       'division_id' => 'required|numeric',
@@ -71,29 +73,37 @@ class RegisterController extends Controller
       'phone_no' => 'required|max:15',
       'street_address' => 'required|max:100',
     ]);
+
   }
 
   /**
   * Create a new user instance after a valid registration.
   *
   * @param  array  $data
-  * @return \App\Models\User
+  * @return \App\User
   */
-  protected function create(array $data)
+  protected function register(Request $request)
   {
     $user = User::create([
-      'first_name' => $data['first_name'],
-      'last_name' => $data['last_name'],
-      'username' => $data['username'],
-      'division_id' => $data['division_id'],
-      'district_id' => $data['district_id'],
-      'phone_no' => $data['phone_no'],
-      'street_address' => $data['street_address'],
+      'first_name' => $request->first_name,
+      'last_name' => $request->last_name,
+      'username' => $request->username,
+      'division_id' => $request->division_id,
+      'district_id' => $request->district_id,
+      'phone_no' => $request->phone_no,
+      'street_address' => $request->street_address,
       'ip_address' => request()->ip(),
-      'email' => $data['email'],
-      'password' => Hash::make($data['password']),
-      'remember_token' => Str::random(50),
-      'status'=> 0,
+      'email' => $request->email,
+      'password' => Hash::make($request->password),
+      'remember_token'  =>str::random(50),
+      'status'  => 0,
     ]);
+
+    $user->notify(new VerifyRegistration($user));
+
+    session()->flash('success', 'A confirmation email has sent to you.. Please check and confirm your email');
+    return redirect('/');;
+
+
   }
 }

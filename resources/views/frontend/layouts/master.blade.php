@@ -11,6 +11,7 @@
   <div class="wrapper">
     {{-- start nav --}}
     @include('frontend.partials.nav')
+    @include('frontend.partials.message')
     {{-- start sidebar + content --}}
       @yield('content')
     {{-- Footer --}}

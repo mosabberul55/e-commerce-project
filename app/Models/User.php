@@ -27,6 +27,7 @@ class User extends Authenticatable
         'ip_address',
         'email',
         'password',
+        'remember_token',
     ];
 
     /**
